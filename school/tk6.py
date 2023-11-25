@@ -1,0 +1,11 @@
+from tkinter import*
+root=Tk()
+l1=Label(width=7, height=4, bg='yellow',text="1")
+l1.pack(side=TOP)
+l2=Label(width=7, height=4, bg='orange',text="2")
+l2.pack(side=BOTTOM)
+l3=Label(width=7, height=4, bg='lightgreen',text="3")
+l3.pack(side=LEFT)
+l4=Label(width=7, height=4, bg='lightblue',text="4")
+l4.pack(side=RIGHT)
+root.mainloop()
