@@ -1,50 +1,26 @@
 #include <stdio.h>
-#include <string.h>
+#include <math.h>
 
-#define MAX_MORSE_LENGTH 100  // Choose an appropriate maximum length
+double to_basic_degrees(double degrees) {
+  double rounded_degrees = round(degrees / 360.0) * 90.0;
 
-int is_morse_code_valid(const char morse[]) {
-    char morse_code_copy[MAX_MORSE_LENGTH];
-    strncpy(morse_code_copy, morse, sizeof(morse_code_copy) - 1);
-    morse_code_copy[sizeof(morse_code_copy) - 1] = '\0';  // Ensure null-termination
+  // Ensure the value is one of the specified basic degrees
+  if (rounded_degrees == 0) {
+    rounded_degrees = 360.0;
+  }
 
-    char *token = strtok(morse_code_copy, " "); // Tokenize the string
-
-    // Morse code dictionary
-    char *morse_code_dict[] = {
-        ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....",   // A to H
-        "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",    // I to P
-        "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",   // Q to X
-        "-.--", "--..", ".----", "..---", "...--", "....-", ".....", // 1 to 5
-        "-....", "--...", "---..", "----.", "-----", "/"           // 6 to 0, space
-    };
-
-    while (token != NULL) {
-        int is_valid = 0;
-        for (int i = 0; i < sizeof(morse_code_dict) / sizeof(morse_code_dict[0]); ++i) {
-            if (strcmp(token, morse_code_dict[i]) == 0) {
-                is_valid = 1;
-                break;
-            }
-        }
-
-        if (!is_valid) {
-            return 0;  // Not valid Morse code
-        }
-
-        token = strtok(NULL, " ");  // Move to the next token
-    }
-
-    return 1;  // Valid Morse code
+  return rounded_degrees;
 }
 
 int main() {
-    const char *morse_code_input = "-.-.- .-.-.-.-. ---";
-    if (is_morse_code_valid(morse_code_input)) {
-        printf("The Morse code '%s' is valid.\n", morse_code_input);
-    } else {
-        printf("The Morse code '%s' is not valid.\n", morse_code_input);
-    }
+  double input_degrees;
 
-    return 0;
+  printf("Enter a value in degrees: ");
+  scanf("%lf", &input_degrees);
+
+  double basic_degrees = to_basic_degrees(input_degrees);
+
+  printf("%lf degrees is equal to %lf basic degrees.\n", input_degrees, basic_degrees);
+
+  return 0;
 }

@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 int is_whites(const char c)
 {
@@ -91,7 +92,28 @@ int count_whites(const char string[])
 
 int direction_correction(const int degree)
 {
-    
+    if(degree < 0 || degree%90!=0)
+    {
+        return -1;
+    }
+    if(degree == 0 || degree == 360)
+    {
+        return 360;
+    }
+    else if (degree == 90)
+    {
+        return 90;
+    }
+    else if (degree == 180)
+    {
+        return 180;
+    }
+    else if (degree == 270)
+    {
+        return 270;
+    }
+    float turns = round((degree / 360.0))*90.0;
+    return turns;
 }
 
 int main()
@@ -114,6 +136,6 @@ int main()
     const char string2[] = "Hello, how are you?\n";
     printf("%d\n", count_whites(string2));
     ////////////////////////////////////////////////////////////////
-
+    printf("%d %d %d\n", direction_correction (-90), direction_correction (540), direction_correction (180));
     return 0;
 }
