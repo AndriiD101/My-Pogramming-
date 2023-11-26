@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <ctype.h>
 
 int is_whites(const char c)
 {
@@ -116,6 +117,93 @@ int direction_correction(const int degree)
     return turns;
 }
 
+int all_positives(const int size, const int array[])
+{
+    for(int i = 0; i < size; i++)
+    {
+        if(array[i] <= 0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int last_positive(const int size, const int array[])
+{
+    int tmp = 0;
+    if(array == NULL)
+    {
+        return -1;
+    }
+    for(int i = 0; i < size; i++)
+    {
+        if(array[i] > 0)
+        {
+            tmp = array[i];
+        }
+    }
+    if(tmp > 0)
+    {
+        return tmp;
+    }
+    return -1;
+}
+
+int bynary_num(const int num)
+{
+    if(num == 0 || num == 1)
+    {
+        return 1;
+    }
+    if(-1000<num && 1000>num )
+    {
+        return 0;
+    }
+    return -1;
+}
+
+void swap_sign(const int size, int array[])
+{
+    for(int i=0; i<size; i++)
+    {
+        array[i] = array[i] * -1;
+    }
+}
+
+int div_by_3(const int num)
+{
+    if(num%3 == 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int same_case(const char a, const char b) {
+    if (!isalpha(a) || !isalpha(b)) {
+        return -1;
+    }
+
+    if ((isupper(a) && isupper(b)) || (islower(a) && islower(b))) {
+        return 1;
+    }
+
+    return 0;
+}
+
+int find_first_A(const char string[])
+{
+    for(int i = 0; i <strlen(string); i++) 
+    {
+        if(string[i] == 'A' || string[i] == 'a')
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+
 int main()
 {
     printf("%d %d \n", is_whites('0'), is_whites(' '));
@@ -137,5 +225,32 @@ int main()
     printf("%d\n", count_whites(string2));
     ////////////////////////////////////////////////////////////////
     printf("%d %d %d\n", direction_correction (-90), direction_correction (540), direction_correction (180));
+    ////////////////////////////////////////////////////////////////
+    const int array4[] = {1,2,0,3,4,0}; 
+    const int array5[] = {1,2,6,3,4,7}; 
+    const int array6[] = {1,2,-1,3,4,-2};
+    printf("%d %d %d\n", all_positives (6, array1), all_positives (6, array2), all_positives (6, array3)); 
+    // 0 1 0
+    ////////////////////////////////////////////////////////////////
+    const int array7[] = {0,1,0};
+    const int array8[] = {-1,0,6,-2};
+    printf("%d %d\n", last_positive (3, array7), last_positive(4, array8)); 
+    // 1 -1
+    ////////////////////////////////////////////////////////////////
+    printf("%d %d %d\n", bynary_num (-1001), bynary_num (3), bynary_num (1));
+    ////////////////////////////////////////////////////////////////
+    int array[] = {1,2,0,-3,4,0}; swap_sign (6, array);
+    for (int i = 0; i < 6; i++){ 
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+    // -1 -2 0 3 -4 0
+    ////////////////////////////////////////////////////////////////
+    printf ("%d %d %d\n", div_by_3(-3), div_by_3(6), div_by_3(8));
+    ////////////////////////////////////////////////////////////////
+    printf("%d %d %d\n", same_case('a', 'f'), same_case ('L','g'), same_case ('#', 'P')); // 1 0-1
+    ////////////////////////////////////////////////////////////////
+    printf("%d\n", find_first_A("Tommorow afternoon"));
+    
     return 0;
 }
