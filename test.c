@@ -1,53 +1,66 @@
 #include <stdio.h>
 
-int drop_piece(int rows, int cols, char board[rows][cols], int col, char player_piece) {
-    int column = col - 1;
-    if (column < 0 || column >= cols) {
-        return -1; // Invalid column number
+int check_diagonal(int rows, int cols, const char board[rows][cols], int row, int col, char player_piece) {
+    //left-down to right-upper
+    int l_row = row - 1;
+    int l_col = col - 1;
+
+    while (l_row >= 0 && l_col >= 0 && board[l_row][l_col] == player_piece) {
+        l_row--;
+        l_col--;
     }
-    int row = rows - 1;
-    while (row >= 0 && board[row][column] != '.') {
-        row--;
+
+    int count = 0;
+    // Diagonal counting from right-upper to left-down
+    for (int r = l_row + 1, c = l_col + 1; r < rows && c < cols; r++, c++) {
+        if (board[r][c] != player_piece) {
+            break;
+        }
+        count++;
     }
-    if (row < 0) {
-        return -1; // Column is full
+
+    if (count >= 4) {
+        return 1;
     }
-    board[row][column] = player_piece; // Place the player's piece in the found row
-    return row;
+
+    //left-uppper to right-down
+    l_row = row + 1;
+    l_col = col - 1;
+
+    while (l_row < rows && l_col >= 0 && board[l_row][l_col] == player_piece) {
+        l_row++;
+        l_col--;
+    }
+
+    count = 0;
+    // Diagonal counting from left-upper to right-down
+    for (int r = l_row - 1, c = l_col + 1; r >= 0 && c < cols; r--, c++) {
+        if (board[r][c] != player_piece) {
+            break;
+        }
+        count++;
+    }
+
+    if (count >= 4) {
+        return 1;
+    }
+
+    return 0;
 }
 
 int main() {
-    // Example usage
-    const int rows = 10;
-    const int cols = 10;
-    char board[rows][cols];
+    int rows = 4;
+    int cols = 7;
+    char board[4][7] = {
+        {'X', '.', '.', '.', '.', '.', '.'},
+        {'O', 'X', '.', '.', '.', '.', '.'},
+        {'O', 'O', 'X', '.', '.', '.', '.'},
+        {'O', 'O', 'O', 'X', '.', '.', '.'}
+    };
 
-    // Initialize the board with dots (representing empty spaces)
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            board[i][j] = '.';
-        }
-    }
+    int result = check_diagonal(rows, cols, board, 0, 0, 'X'); // Check diagonals around the last move
 
-    // Example usage of drop_piece function
-    int result = drop_piece(8, cols, board, 5, 'X'); // Drop 'X' in column 5
-
-    // Display the resulting board
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%c ", board[i][j]);
-        }
-        printf("\n");
-    }
-
-    // Display the result of drop_piece function
-    if (result >= 0) {
-        printf("Ring successfully placed in row %d\n", result);
-    } else if (result == -1) {
-        printf("Invalid column number or column is full\n");
-    } else {
-        printf("Failed to place the ring\n");
-    }
+    printf("Result: %d\n", result);
 
     return 0;
 }
