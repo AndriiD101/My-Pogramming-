@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void initialize_board(int rows, int cols, char board[rows][cols]) {
     for (int i = 0; i < rows; i++) {
@@ -30,7 +31,7 @@ void print_board(int rows, int cols, const char board[rows][cols]) {
 }
 
 int is_valid_move(int rows, int cols, const char board[rows][cols], int col) {
-    int colik = col - 1;
+    int colik = col;
     if (colik < 0 || colik >= cols || board[0][colik] == 'X' || board[0][colik] == 'O') {
         return 0;
     }
@@ -46,14 +47,14 @@ int is_valid_move(int rows, int cols, const char board[rows][cols], int col) {
 
 
 int drop_piece(int rows, int cols, char board[rows][cols], int col, char player_piece) {
-    int colik = col - 1;
+    int colik = col;
     if (colik < 0 || colik >= cols) {
         return 0;
     }
     for(int row = rows -1; row >= 0; row--) {
         if(board[row][colik] == '.') {
             board[row][colik] = player_piece;
-            return row+1;
+            return row;
         }
     }
     return 0;
@@ -61,7 +62,7 @@ int drop_piece(int rows, int cols, char board[rows][cols], int col, char player_
 
 int check_vertical(int rows, int cols, const char board[rows][cols], int row, int col, char player_piece) {
     int count = 0;
-    int column = col  - 1;
+    int column = col;
     for (int i = 0; i < rows; i++) {
         if (board[i][column] == player_piece) {
             count++;
@@ -77,7 +78,7 @@ int check_vertical(int rows, int cols, const char board[rows][cols], int row, in
 
 int check_horizontal(int rows, int cols, const char board[rows][cols], int row, int col, char player_piece) {
     int count = 0;
-    int l_row = row - 1;
+    int l_row = row;
     for (int j = 0; j < cols; j++) {
         if (board[l_row][j] == player_piece) {
             count++;
@@ -93,53 +94,55 @@ int check_horizontal(int rows, int cols, const char board[rows][cols], int row, 
 
 int check_diagonal(int rows, int cols, const char board[rows][cols], int row, int col, char player_piece) {
     //left-down to right-upper
-    int l_row = row-1;
-    int l_col = col-1;
-    printf("initial: %d , %d \n", l_row, l_col);
-    for(int r = l_row, c = l_col; r>= 0 && r<rows && c>=0 && c<cols; r++, c--){
-        printf("cycle: %d , %d \n", l_row, l_col);
-        if(board[r][c] != player_piece){
+    int l_row = row;
+    int l_col = col;
+
+    for (int r = l_row, c = l_col; r >= 0 && r < rows && c >= 0 && c < cols; r++, c--) {
+        if (board[r][c] != player_piece) {
             break;
         }
         l_row++;
         l_col--;
     }
-    printf("left-down: %d , %d \n", l_row, l_col);
+
     int count = 0;
-    for(int r = l_row, c = l_col; r>= 0 && r<rows && c>=0 && c<cols; r--, c++){
-        if(board[r][c] != player_piece){
+    // Diagonal counting from right-upper to left-down
+    for (int r = l_row - 1, c = l_col + 1; r >= 0 && c < cols; r--, c++) {
+        if (board[r][c] != player_piece) {
             break;
         }
         count++;
     }
-    printf("count: %d\n", count);
-    if(count >= 4)
-    {
+
+    if (count >= 4) {
         return 1;
     }
-    // left-uppper to right-down
+
+    //left-upper to right-down
     l_row = row;
     l_col = col;
-    for(int r = l_row, c = l_col-1; r>= 0 && r<rows && c>=0 && c<cols; r--, c--){
-        if(board[r][c] != player_piece){
+
+    for (int r = l_row, c = l_col; r >= 0 && r < rows && c >= 0 && c < cols; r--, c--) {
+        if (board[r][c] != player_piece) {
             break;
         }
         l_row--;
         l_col--;
     }
-    printf("left-upper: %d , %d \n", l_row, l_col);
+
     count = 0;
-    for(int r = l_row, c = l_col; r>= 0 && r<rows && c>=0 && c<cols; r++, c++){
-        if(board[r][c] != player_piece){
+    // Diagonal counting from left-upper to right-down
+    for (int r = l_row + 1, c = l_col + 1; r < rows && c < cols; r++, c++) {
+        if (board[r][c] != player_piece) {
             break;
         }
         count++;
     }
-    printf("count: %d\n", count);
-    if(count>=4)
-    {
+
+    if (count >= 4) {
         return 1;
     }
+
     return 0;
 }
 
@@ -207,11 +210,12 @@ void play_connect4_game(int rows, int cols) {
     char player_piece = 'X';
 
     while (1) {
+        system("clear");
         print_board(rows, cols, board);
-        printf("Player %d, enter the column number (1-%d): ", player_turn, cols);
+        printf("Player %d, enter the column number (0-%d): ", player_turn, cols);
         scanf("%d", &col);
         // Convert column number to index
-        // col--;
+         col--;
 
         // Check if the selected column is valid
         if (!is_valid_move(rows, cols, board, col)) {
@@ -244,7 +248,7 @@ void play_connect4_game(int rows, int cols) {
 
 int main() {
     int rows = 4;
-    int cols = 7;
+    int cols = 4;
     // char board[rows][cols];
     // initialize_board(rows, cols, board);
     // board[4][4] = 'X';

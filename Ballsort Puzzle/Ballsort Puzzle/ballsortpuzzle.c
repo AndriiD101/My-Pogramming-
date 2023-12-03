@@ -6,49 +6,6 @@
 
 
 //======================================================================================================================
-//play with COLOURs
-/*
-#include <windows.h>
-//FOREGROUND_RED
-//FOREGROUND_GREEN
-//FOREGROUND_BLUE
-#define FOREGROUND_WHITE		    (FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN)
-#define FOREGROUND_YELLOW       	(FOREGROUND_RED | FOREGROUND_GREEN)
-#define FOREGROUND_CYAN		        (FOREGROUND_BLUE | FOREGROUND_GREEN)
-#define FOREGROUND_MAGENTA	        (FOREGROUND_RED | FOREGROUND_BLUE)
-#define FOREGROUND_BLACK		    0
-
-#define FOREGROUND_INTENSE_RED		(FOREGROUND_RED | FOREGROUND_INTENSITY)
-#define FOREGROUND_INTENSE_GREEN	(FOREGROUND_GREEN | FOREGROUND_INTENSITY)
-#define FOREGROUND_INTENSE_BLUE		(FOREGROUND_BLUE | FOREGROUND_INTENSITY)
-#define FOREGROUND_INTENSE_WHITE	(FOREGROUND_WHITE | FOREGROUND_INTENSITY)
-#define FOREGROUND_INTENSE_YELLOW	(FOREGROUND_YELLOW | FOREGROUND_INTENSITY)
-#define FOREGROUND_INTENSE_CYAN		(FOREGROUND_CYAN | FOREGROUND_INTENSITY)
-#define FOREGROUND_INTENSE_MAGENTA	(FOREGROUND_MAGENTA | FOREGROUND_INTENSITY)
-void print_char_in_colour(const WORD p_colour, const char p_char){
-  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),p_colour);
-  printf("%c\n", p_char);
-}
-  print_char_in_colour(FOREGROUND_RED,'*');
-  print_char_in_colour(FOREGROUND_GREEN,'*');
-  print_char_in_colour(FOREGROUND_BLUE,'*');
-  print_char_in_colour(FOREGROUND_WHITE,'*');
-  print_char_in_colour(FOREGROUND_YELLOW,'*');
-  print_char_in_colour(FOREGROUND_CYAN,'*');
-  print_char_in_colour(FOREGROUND_MAGENTA,'*');
-*/
-
-
-//======================================================================================================================
-//Global Constants
-
-// const char BALLS[] = {'@','#','*','$','%','&','>','~','<','%','^','+','=','?','A','B','O','Q','R','W'};
-// // const int MAX_BALLS_COUNT=20;
-// // const int MAX_ROWS=MAX_BALLS_COUNT;
-// // const int MAX_COLUMNS=MAX_BALLS_COUNT+2;
-// const int VERBOSE=1; // print additional diagnostics info
-
-//======================================================================================================================
 void generator(const int rows, const int columns, char field[rows][columns]){
   const int VERBOSE=1; // print additional diagnostics info
   const char BALLS[] = {'@','#','*','$','%','&','>','~','<','%','^','+','=','?','A','B','O','Q','R','W'};
