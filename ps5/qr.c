@@ -58,6 +58,24 @@ void encode_string(const char string[], bool bytes[strlen(string)+1][8])
     }
 }
 
+void decode_bytes(const int rows, bool bytes[rows][8], char string[rows])
+{
+    int result_ascii=0;
+    int mid;
+    char ch;
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j=8; j>0; j--)
+        {
+            mid = pow(2, 8-j) * bytes[i][j-1];
+            result_ascii += mid;
+        }
+        ch = result_ascii;
+        string[i] = ch;
+        result_ascii = 0;
+    }
+}
+
 
 
 int main()
