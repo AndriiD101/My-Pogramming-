@@ -75,7 +75,7 @@ void decode_bytes(const int rows, bool bytes[rows][8], char string[rows])
         result_ascii = 0;
     }
 }
-
+ 
 void bytes_to_blocks(const int cols, const int offset, bool blocks[offset * 8][cols], const int rows, bool bytes[rows][8]) {
     for (int row = 0; row < offset; row++) {
         for (int col = 0; col < cols; col++) {
