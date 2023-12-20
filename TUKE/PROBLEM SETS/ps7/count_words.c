@@ -5,7 +5,8 @@
 #define TARGET_WORD_UPPER_B "BANANAS"
 #define TARGET_WORD_LOWER_A "ananas"
 #define TARGET_WORD_UPPER_A "ANANAS"
-#define TARGET_LENGTH 6
+#define TARGET_LENGTH_A 6
+#define TARGET_LENGTH_B 7
 
 #include <stdio.h>
 
@@ -22,7 +23,7 @@ void writeCountToFile(FILE *file, int count) {
             digits[i++] = digit;
             temp /= 10;
         }
-        
+
         for (i = i - 1; i >= 0; i--) {
             fputc(digits[i] + '0', file);
         }
@@ -52,7 +53,7 @@ int main(int argc, char *argv[]) {
         } else {
             symbol = 0;
         }
-        if (symbol == TARGET_LENGTH) {
+        if (symbol == TARGET_LENGTH_A || symbol == TARGET_LENGTH_B) {
             count++;
             symbol = 0;
         }

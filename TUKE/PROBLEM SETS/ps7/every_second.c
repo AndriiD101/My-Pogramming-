@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 
 int check_start(char array[], int index);
 int check_stop(char array[], int index);
@@ -43,15 +42,15 @@ int main(int argc, char* argv[]) {
     char result[file_size];
     int r_index = 0;
     int word_count = 0;
-    bool in_word = false;
+    int in_word = 0;
     int word_index = 0;
 
     // Count words in content
     for(int i = 0; i < c_index - 4; i++) {
         if(content[i] == ' ') {
-            in_word = false;
-        } else if(!in_word) {
-            in_word = true;
+            in_word = 0;
+        } else if(in_word == 0) {
+            in_word = 1;
             word_count++;
             word_index++;
         }
