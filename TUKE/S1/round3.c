@@ -7,7 +7,6 @@ int max_2d(const int size, const int array[][size])
 {
     int max = 0;
     if(array == NULL) return -1;
-
     for(int row = 0; row < size; row++){
         for(int col = 0; col < size; col++){
             if(array[row][col] > max)

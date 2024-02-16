@@ -93,28 +93,32 @@ int count_whites(const char string[])
 
 int direction_correction(const int degree)
 {
+    int degree_l = degree;
     if(degree < 0 || degree%90!=0)
     {
         return -1;
     }
-    if(degree == 0 || degree == 360)
+    // if(degree == 0 || degree == 360)
+    // {
+    //     return 360;
+    // }
+    // else if (degree == 90)
+    // {
+    //     return 90;
+    // }
+    // else if (degree == 180)
+    // {
+    //     return 180;
+    // }
+    // else if (degree == 270)
+    // {
+    //     return 270;
+    // }
+    while(degree_l>=360)
     {
-        return 360;
+        degree_l -= 360;
     }
-    else if (degree == 90)
-    {
-        return 90;
-    }
-    else if (degree == 180)
-    {
-        return 180;
-    }
-    else if (degree == 270)
-    {
-        return 270;
-    }
-    float turns = round((degree / 360.0))*90.0;
-    return turns;
+    return degree_l;
 }
 
 int all_positives(const int size, const int array[])
@@ -224,7 +228,8 @@ int main()
     const char string2[] = "Hello, how are you?\n";
     printf("%d\n", count_whites(string2));
     ////////////////////////////////////////////////////////////////
-    printf("%d %d %d\n", direction_correction (-90), direction_correction (540), direction_correction (180));
+    printf("lol heere>>> ");
+    printf("%d %d %d\n", direction_correction (-90), direction_correction (540), direction_correction (90));
     ////////////////////////////////////////////////////////////////
     const int array4[] = {1,2,0,3,4,0}; 
     const int array5[] = {1,2,6,3,4,7}; 
