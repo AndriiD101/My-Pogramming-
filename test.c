@@ -1,41 +1,57 @@
-#include <stdbool.h>
-#include <string.h>
-#include <ctype.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
-bool is_valid_ip(const char * addr) {
-  char *token;
-  char temp[20]; 
-  strcpy(temp, addr); 
-  token = strtok(temp, ".");
-  int flag = 0;
-  while(token != '\0'){
-    for (int i = 0; token[i] != '\0'; i++) {
-      if (!isdigit(token[i])){
-        return false;
+struct player {
+    char name[50];
+    int score;
+};
+
+void swap(struct player *a, struct player *b) {
+    struct player temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void bubbleSort(struct player list[], int size) {
+    bool swapped;
+    for (int i = 0; i < size - 1; i++) {
+        swapped = false;
+        for (int j = 0; j < size - i - 1; j++) {
+            if (list[j].score < list[j + 1].score) {
+                swap(&list[j], &list[j + 1]);
+                swapped = true;
+            }
+        }
+        // If no two elements were swapped in the inner loop, then the array is already sorted
+        if (!swapped) {
+            break;
         }
     }
-    if(token[0] == '0'){
-      return false;
-    }
-    int num = atoi(token);
-    if(num <0){
-      return false;
-    }
-    if(0<num && num<=255){
-      flag++;
-    }
-    token = strtok(NULL, ".");
-  }
-  if(flag == 4){
-    return true;
-  }
-  return false;
-} 
+}
 
-int main()
-{
+int main() {
+    // Sample player list
+    struct player players[] = {
+        {"Player1", 100},
+        {"Player2", 85},
+        {"Player3", 95},
+        {"Player4", 70},
+        {"Player5", 110}
+    };
+
+    int size = sizeof(players) / sizeof(players[0]);
+
+    printf("Before sorting:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%s - %d\n", players[i].name, players[i].score);
+    }
+
+    bubbleSort(players, size);
+
+    printf("\nAfter sorting:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%s - %d\n", players[i].name, players[i].score);
+    }
 
     return 0;
 }

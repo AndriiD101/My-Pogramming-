@@ -118,9 +118,9 @@ int main()
     encode_string(text, bytes1);
     for(int j = 0; j <= len; j++){
     printf("%c: ", text[j]);
-    for(int i = 0; i < 8; i++){
-        printf("%d", bytes1[j][i]);
-    }
+        for(int i = 0; i < 8; i++){
+            printf("%d", bytes1[j][i]);
+        }
     printf("\n");
     }
     // prints:

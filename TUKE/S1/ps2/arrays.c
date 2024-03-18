@@ -172,7 +172,7 @@ int array_max(const int input_array[], const int array_size)
 }
 
 //Task8
-//maybe i should to make this better, because i am not sure if
+//maybe i should make this better, because i am not sure if
 //this will work for all numbers
 int factorize_count(const int n)
 {
