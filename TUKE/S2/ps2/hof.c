@@ -15,15 +15,41 @@ void swap(struct player *a, struct player *b) {
 
 int load(struct player list[]){
     int position=0;
-    int score = 0;
-    char name[MAX_NAME_LENGTH];
-    FILE *file = fopen("scores.txt", "r");
+    char content_of_file[1000];
+    FILE *file = fopen(HOF_FILE, "r");
     if (file == NULL) return -1;
-    while (fscanf(file, "%s %d", name, &score) == 2 && position < 10) {
-        strcpy(list[position].name, name);
-        list[position].score = score;
-        position++;
+
+    while(position < 10 && (fgets(content_of_file, sizeof(content_of_file), file))){
+
+        struct player player;
+        char * name = strtok(content_of_file, " ");
+        char * score = strtok(NULL, " ");
+
+        if(name != NULL && score != NULL) {
+            strncpy(player.name, name, sizeof(player.name)-1);
+            player.name[sizeof(player.name)-1] = '\0';
+            player.score = atoi(score);
+
+            list[position] = player;
+            position++;
+        }
     }
+
+    bool swapped = false;
+    for (int i = 0; i < position-1; i++){
+        swapped = false;
+        for(int j = 0; j<position-i-1; j++){
+            if(list[j].score < list[j+1].score){
+                swap(&list[j], &list[j+1]);
+                swapped = true;
+            }
+        }
+        if(!swapped){
+            break;
+        }
+    }
+
+    fclose(file);
     return position;
 }
 
@@ -33,7 +59,7 @@ bool save(const struct player list[], const int size){
         temp_list[i] = list[i];
     }
     FILE *file;
-    file = fopen("scores.txt", "w+");
+    file = fopen(HOF_FILE, "w");
     if (file == NULL){
         return false;
     }
@@ -50,12 +76,28 @@ bool save(const struct player list[], const int size){
             break;
         }
     }
-    for(int i = 0; i < size; i++){
-        fprintf(file, "%s %d\n", temp_list[i].name, temp_list[i].score);
-    }
     fclose(file);
     return true;
 }
+
+bool add_player(struct player list[], int* size, const struct player player){
+    if(list && size && player.name && *size>0 && *size<=10) {
+        for(int i = 0; i < *size; i++){
+            if(list[i].score <= player.score){
+                list[i] = player;
+                if(*size<10) *size+=1;
+                return true;
+            }
+        }
+        if(*size<10){
+            list[*size] = player;
+            *size+=1;
+            return true;
+        }
+    }
+    return false;
+}
+
 
 // int main() {
 //     // Sample player list

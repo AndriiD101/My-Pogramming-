@@ -3,8 +3,7 @@
 #include <string.h>
 #include <math.h>
 
-//#define COUNT 10
-
+#define COUNT 10
 
 typedef struct treenode{
     int root;
@@ -28,26 +27,48 @@ treenode *put_values_in_tree(treenode *node, int value){
     if(value<node->root){
         node->left = put_values_in_tree(node->left, value);
     }
-    else{
+    else if(value>node->root){
         node->right = put_values_in_tree(node->right, value);
     }
     return node;
 }
 
-int check_is_same(treenode* p, treenode* q) {
+// void print2DUtil(treenode* root, int space)
+// {
+//     if (root == NULL)
+//         return;
+ 
+//     space += COUNT;
+ 
+//     print2DUtil(root->right, space);
+ 
+//     printf("\n");
+//     for (int i = COUNT; i < space; i++)
+//         printf(" ");
+//     printf("%d\n", root->root);
+ 
+//     print2DUtil(root->left, space);
+// }
+ 
+// void print2D(treenode* root)
+// {
+//     print2DUtil(root, 0);
+// }
+
+int isSameStructure(treenode* p, treenode* q) {
     if (p == NULL && q == NULL) return 1;
     if (p == NULL || q == NULL) return 0;
-    return check_is_same(p->left, q->left) && check_is_same(p->right, q->right);
+    return isSameStructure(p->left, q->left) && isSameStructure(p->right, q->right);
 }
 
-int count_unique_trees(treenode** array_of_trees, int n) {
+int countUniqueTrees(treenode** array_of_trees, int n) {
     int count = 0;
     int* visited = calloc(n, sizeof(int));
     for (int i = 0; i < n; i++) {
         if (visited[i] == 0) {
             count++;
             for (int j = i + 1; j < n; j++) {
-                if (check_is_same(array_of_trees[i], array_of_trees[j])) {
+                if (isSameStructure(array_of_trees[i], array_of_trees[j])) {
                     visited[j] = 1;
                 }
             }
@@ -57,22 +78,13 @@ int count_unique_trees(treenode** array_of_trees, int n) {
     return count;
 }
 
-void deallocate(treenode *root){
-    if(root != NULL){
-    deallocate(root->left);
-    deallocate(root->right);
-    free(root);
-    }
-}
-
 int main(){
-    int n, k;
+    int n, k, value;
     // printf("n k: ");
     scanf("%d %d", &n, &k);
     if(1>n || n>50) return -1;
     if(1>k || k>20) return -1;
-    // treenode **array_of_trees=NULL;
-    // array_of_trees = (treenode**) malloc(n * sizeof(struct treenode*));
+    treenode **array_of_trees = malloc(n * sizeof(struct treenode*));
     int input_tree_values[n][k];
     for (int i = 0; i < n; i++) {
         treenode *root = NULL;
@@ -84,15 +96,24 @@ int main(){
         for(int cols = 1; cols < k; cols++) { 
                 root = put_values_in_tree(root, input_tree_values[i][cols]);
         }
-        // array_of_trees[i] = root;
+        array_of_trees[i] = root;
     }
 
-    // printf("%d\n", is_unique_trees(array_of_trees, n));
-
-    // for(int i = 0; i<n; i++){
-        // deallocate(array_of_trees[i]);
-        // array_of_trees[i] = NULL;
+    // printf("Binary trees (inorder traversal):\n");
+    // for (int i = 0; i < n; ++i) {
+    //     printf("Tree %d: ", i + 1);
+    //     printf("\n");
+    //     print2D(array_of_trees[i]);
+    //     printf("\n");
     // }
-    // free(array_of_trees);
+
+    printf("%d\n", countUniqueTrees(array_of_trees, n));
+
+    // Free allocated memory
+    for (int i = 0; i < n; i++) {
+        free(array_of_trees[i]);
+    }
+    free(array_of_trees);
+
     return 0;
 }
