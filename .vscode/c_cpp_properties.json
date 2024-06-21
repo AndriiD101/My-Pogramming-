@@ -5,7 +5,7 @@
       "includePath": [
         "${workspaceFolder}/**"
       ],
-      "compilerPath": "C:/Program Files/MinGW/bin",
+      "compilerPath": "C:\\Program Files\\MinGW\\bin",
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "windows-clang-x64",

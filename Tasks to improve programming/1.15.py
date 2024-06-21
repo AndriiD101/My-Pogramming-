@@ -1,5 +1,0 @@
-first=input("write first number: ")
-second=input("write second number: ")
-third=input("write third number: ")
-fourth=input("write fourth number: ")
-print(first, second, third, fourth)
