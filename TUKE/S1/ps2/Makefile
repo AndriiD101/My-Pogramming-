@@ -1,7 +1,7 @@
 # variables
 CC=gcc
 CFLAGS=-std=c11 -Wall -Werror
-LDLIBS=-lsuperkarel -lcurses
+#LDLIBS=-lsuperkarel -lcurses
 OUTPUT=$@
 
 # targets
