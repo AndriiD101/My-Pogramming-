@@ -1,0 +1,15 @@
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/bin/Debug/net8.0/Test
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/bin/Debug/net8.0/Test.deps.json
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/bin/Debug/net8.0/Test.runtimeconfig.json
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/bin/Debug/net8.0/Test.dll
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/bin/Debug/net8.0/Test.pdb
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/Test.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/Test.AssemblyInfoInputs.cache
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/Test.AssemblyInfo.cs
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/Test.csproj.CoreCompileInputs.cache
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/Test.sourcelink.json
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/Test.dll
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/refint/Test.dll
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/Test.pdb
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/Test.genruntimeconfig.cache
+/mnt/c/Users/denys/Desktop/My-Pogramming-/TUKE/C#/Test/obj/Debug/net8.0/ref/Test.dll

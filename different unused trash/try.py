@@ -1,3 +1,5 @@
-import torch
+filePath = "C:\\Users\\denys\\Desktop\\My-Pogramming-\\TUKE\\C#\\Assignment1\\Assignment1\\samples\\recordings01.csv"
 
-print(torch.cuda.get_device_name(0))
+purchase = filePath.replace("recordings", "purchases")
+
+print(purchase)
